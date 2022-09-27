@@ -42,7 +42,13 @@ class NoteApp extends Component {
     
     onDeleteHandler(id){
         const notes = this.state.notes.filter(contact => contact.id !== id);
-        this.setState({notes})
+        const updateNotes = {
+            id: notes[0].id,
+            title : notes[0].title,
+            body : notes[0].body,
+            createdAt : notes[0].createdAt,
+            archived : true
+        }
     }
 
     render() {
