@@ -111,6 +111,10 @@ h1, h2, h3, h4, h5, h6{
     -o-border-radius: 0 0 15px 15px;
 }
 
+.navbar__brand{
+    font-size: var(--fs-title);
+}
+
 .search-group{
     width: 20%;
     position: relative;
@@ -152,36 +156,12 @@ h1, h2, h3, h4, h5, h6{
 .note-app__section-title{
     font-size: var(--fs-section-title);
     color: var(--clr-font);
-    display: inline-flex;
+    display:flex;
     align-items: center;
     column-gap:15px;
     position: relative;
 }
 
-/* .note-app__note .note-app__section-title::after{
-    right: 25px;
-}
-
-.note-app__section-title::after{
-    content: '';
-    display: block;
-    position: absolute;
-    right: 0;
-    top:50%;
-    transform: translateY(-50%);
-    width: 50%;
-    height: 4px;
-    background-color: var(--clr-primary);
-    border-radius: 10px;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-} */
 
 .note-app__form-wrapper input, .note-app__form-wrapper textarea{
     padding: 10px;
@@ -354,7 +334,52 @@ h1, h2, h3, h4, h5, h6{
         --fs-title:20px;
     }
 
+    .search-group{
+        width: 40%;
+    }
+
     .note-card{
         width: 100%;
+    }
+}
+
+@media(max-width:640px){
+    .note-app__content-wrapper{
+        grid-template-columns: 1fr;
+    }
+
+    .note-app__note{
+        order: 2;
+    }
+
+    .note-app__form-wrapper{
+        order: 1;
+    }
+}
+
+@media(max-width:468px){
+    .navbar{
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    .search-group{
+        width: 100%;
+    }
+
+    .search-group input{
+        height: 35px;
+    }
+
+    .note-app__content-wrapper{
+        padding-top: 115px;
+    }
+
+    .note-app__note, .note-app__form-wrapper{
+        row-gap: 15px;
+    }
+
+    .note-app__section-title{
+        justify-content: center;
     }
 }

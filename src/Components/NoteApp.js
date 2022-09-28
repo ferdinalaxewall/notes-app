@@ -8,7 +8,8 @@ class NoteApp extends Component {
         super(props);
 
         this.state = {
-            notes :  getInitialData()
+            notes :  getInitialData(),
+            search: "",
         }
 
         this.onAddNoteEventHandler = this.onAddNoteEventHandler.bind(this);
@@ -18,24 +19,12 @@ class NoteApp extends Component {
     }
 
     onSearchNotesEventHandler(event){
-        const searchValue = event.target.value.toUpperCase();
-
-        let notes = this.state.notes;
-        if (event.target.value.length !== 0) {
-            const filteredNotes = this.state.notes.filter(note => {
-                if (note.title.toUpperCase().indexOf(searchValue) > -1) {
-                    return note
-                }
-            });
-
-            this.setState({filteredNotes})
-            console.log(notes)
-        } else {
-            notes = this.state.notes;
-        }
-        
-
-        
+        const value = event.target.value;
+        this.setState(() => {
+            return {
+                search : value.toLowerCase()
+            }
+        })
     }
 
     onAddNoteEventHandler({title, body}){
@@ -65,7 +54,6 @@ class NoteApp extends Component {
             createdAt : notes[0].createdAt,
             archived : isArchived
         }
-        console.log(updateNotes)
 
         this.onDeleteHandler(notes[0].id);
         this.onUpdateHandler(updateNotes);
@@ -89,10 +77,12 @@ class NoteApp extends Component {
 
     render() {
 
+        const filteredNotes = !this.state.search ? this.state.notes : this.state.notes.filter(note => note.title.toLowerCase().match(this.state.search));
+
     return (
       <div className='note-app'>
         <Navbar onSearch={this.onSearchNotesEventHandler} />
-        <NoteContent notes={this.state.notes} addNote={this.onAddNoteEventHandler} onDelete={this.onDeleteHandler} onArchiveOrActive={this.onArchiveOrActiveHandler} />
+        <NoteContent notes={filteredNotes} addNote={this.onAddNoteEventHandler} onDelete={this.onDeleteHandler} onArchiveOrActive={this.onArchiveOrActiveHandler} />
       </div>
     )
   }

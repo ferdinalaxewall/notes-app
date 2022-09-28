@@ -24,7 +24,7 @@ export class NoteForm extends Component {
       const maxCharacterNumber = 50;
       
       if(value.length > maxCharacterNumber) {
-        value = value.substr(0, maxCharacterNumber);
+        target.value = value.substr(0, maxCharacterNumber);
       }else{
         numberLength.textContent = maxCharacterNumber - value.length;
       }
