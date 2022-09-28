@@ -5,6 +5,7 @@
     --clr-card: #393c41;
     --clr-red: rgb(224, 65, 65);
     --clr-yellow:rgb(255, 212, 0);
+    --clr-green:rgb(6, 255, 27);
     --clr-white:#f2f2f2;
     --font-title:'Quicksand', sans-serif;
     --font-body:'Merriweather', serif;
@@ -157,7 +158,7 @@ h1, h2, h3, h4, h5, h6{
     position: relative;
 }
 
-.note-app__note .note-app__section-title::after{
+/* .note-app__note .note-app__section-title::after{
     right: 25px;
 }
 
@@ -180,7 +181,7 @@ h1, h2, h3, h4, h5, h6{
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
-}
+} */
 
 .note-app__form-wrapper input, .note-app__form-wrapper textarea{
     padding: 10px;
@@ -224,7 +225,7 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .note-app__note, .note-app__form-wrapper{
-    padding: 20px;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
     row-gap: 25px;
@@ -262,7 +263,7 @@ h1, h2, h3, h4, h5, h6{
 .note-card__body{
     width: 100%;
     padding: 10px; 
-    min-height: 170px;
+    /* min-height: 170px; */
     display: flex;
     align-items: flex-start;
 }
@@ -296,7 +297,6 @@ h1, h2, h3, h4, h5, h6{
     background-color: transparent;
     width: 35px;
     height: 35px;
-    padding-top: 2px;
     border-radius: 50%;
     font-size: var(--fs-title);
     -webkit-border-radius: 50%;
@@ -311,12 +311,50 @@ h1, h2, h3, h4, h5, h6{
 .note-card__button button#archive{
     color: var(--clr-yellow);
 }
+.note-card__button button#active{
+    color: var(--clr-green);
+}
 
 .note-card__button button#delete:hover{
     background-color: rgba(211, 79, 79, 0.562);
     opacity: 1;
 }
+.note-card__button button#active:hover{
+    background-color: rgba(33, 244, 40, 0.3);
+    opacity: 1;
+}
+
 .note-card__button button#archive:hover{
     background-color: rgba(255, 212, 0, 0.3);
     opacity: 1;
+}
+
+@media (max-width:1400px){
+    .note-card__button{
+        column-gap: 5px;
+    }
+
+    .note-app__form-wrapper .note-app__section-title::after{
+        width: 15vw;
+    }
+}
+
+@media(max-width:1280px){
+    .note-card{
+        width: 49%;
+    }
+}
+
+@media(max-width:826px){
+    :root{
+        --fs-section-title: 22px;
+        --fs-sub-body:12px;
+        --fs-body:14px;
+        --fs-subtitle: 16px;
+        --fs-title:20px;
+    }
+
+    .note-card{
+        width: 100%;
+    }
 }

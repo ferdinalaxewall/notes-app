@@ -13,7 +13,29 @@ class NoteApp extends Component {
 
         this.onAddNoteEventHandler = this.onAddNoteEventHandler.bind(this);
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
-        this.onArchiveHandler = this.onArchiveHandler.bind(this);
+        this.onArchiveOrActiveHandler = this.onArchiveOrActiveHandler.bind(this);
+        this.onSearchNotesEventHandler = this.onSearchNotesEventHandler.bind(this);
+    }
+
+    onSearchNotesEventHandler(event){
+        const searchValue = event.target.value.toUpperCase();
+
+        let notes = this.state.notes;
+        if (event.target.value.length !== 0) {
+            const filteredNotes = this.state.notes.filter(note => {
+                if (note.title.toUpperCase().indexOf(searchValue) > -1) {
+                    return note
+                }
+            });
+
+            this.setState({filteredNotes})
+            console.log(notes)
+        } else {
+            notes = this.state.notes;
+        }
+        
+
+        
     }
 
     onAddNoteEventHandler({title, body}){
@@ -33,30 +55,44 @@ class NoteApp extends Component {
         })
     }
 
-    onArchiveHandler(id){
-        const notes = this.state.notes.filter(contact => contact.id === id).map((filterNote) => {
-            return filterNote
-        });
-        console.log(notes)
-    }
-    
-    onDeleteHandler(id){
-        const notes = this.state.notes.filter(contact => contact.id !== id);
+    onArchiveOrActiveHandler(id, isArchived){
+        const notes = this.state.notes.filter(note => note.id === id);
+        
         const updateNotes = {
             id: notes[0].id,
             title : notes[0].title,
             body : notes[0].body,
             createdAt : notes[0].createdAt,
-            archived : true
+            archived : isArchived
         }
+        console.log(updateNotes)
+
+        this.onDeleteHandler(notes[0].id);
+        this.onUpdateHandler(updateNotes);
+    }
+
+    onUpdateHandler(notes){
+        this.setState((prevState) => {
+            return {
+                notes : [
+                    ...prevState.notes,
+                    notes
+                ]
+            }
+        });
+    }
+    
+    onDeleteHandler(id){
+        const notes = this.state.notes.filter(note => note.id !== id);
+        this.setState({notes})
     }
 
     render() {
 
     return (
       <div className='note-app'>
-        <Navbar />
-        <NoteContent notes={this.state.notes} addNote={this.onAddNoteEventHandler} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler} />
+        <Navbar onSearch={this.onSearchNotesEventHandler} />
+        <NoteContent notes={this.state.notes} addNote={this.onAddNoteEventHandler} onDelete={this.onDeleteHandler} onArchiveOrActive={this.onArchiveOrActiveHandler} />
       </div>
     )
   }
