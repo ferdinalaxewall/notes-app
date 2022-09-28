@@ -1,12 +1,6 @@
 import React from 'react'
 
 function CardButton({id, onDelete, onArchiveOrActive, isArchived}) {
-  let button;
-  if (isArchived === true) {
-    
-  } else {
-    
-  }
   return (
     <div className='note-card__button'>
         <button id='delete' title='Delete Note' onClick={() => onDelete(id)}><i className='bx bx-trash'></i></button>
